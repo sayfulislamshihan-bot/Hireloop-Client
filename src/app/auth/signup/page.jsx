@@ -155,7 +155,7 @@ export default function SignupPage() {
           {/* Navigation Option */}
           <div className="text-center pt-4 border-t border-zinc-100 dark:border-zinc-800 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
             Already have an account?{" "}
-            <Link href="/signin" className="font-medium cursor-pointer text-sm text-blue-600 dark:text-blue-400">
+            <Link href="/auth/signin" className="font-medium cursor-pointer text-sm text-blue-600 dark:text-blue-400">
               Sign in instead
             </Link>
           </div>
