@@ -4,6 +4,7 @@ import {
   Magnifier,
   Star,
 } from "@gravity-ui/icons";
+import { motion } from "motion/react"
 
 export default function StatsSection() {
   const stats = [
