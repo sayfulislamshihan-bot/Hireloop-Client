@@ -4,6 +4,7 @@ import {
   LogoLinkedin,
   LogoGithub,
 } from "@gravity-ui/icons";
+import Image from "next/image";
 
 
 export default function Footer() {
@@ -16,14 +17,14 @@ export default function Footer() {
           <div className="space-y-6">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 to-fuchsia-500">
-                <span className="text-xl font-bold text-white">P</span>
-              </div>
-
-              <div className="leading-none">
-                <h2 className="text-xl font-bold">Hiring</h2>
-                <h2 className="text-xl font-bold">Loop</h2>
-              </div>
+              <Image
+                src="/images/logo.png"
+                alt="HireLoop Logo"
+                width={120} // Adjust width as needed
+                height={40} // Adjust height as needed
+                className="h-10 w-auto object-contain"
+                priority
+              />
             </Link>
 
             {/* Description */}
