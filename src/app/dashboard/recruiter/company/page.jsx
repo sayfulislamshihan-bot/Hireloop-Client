@@ -11,9 +11,11 @@ import {
     FieldError, 
     Select, 
     ListBox, 
-    Button 
+    Button, 
+    toast
 } from '@heroui/react';
 import { ArrowUpToLine, Globe, Factory, ArrowRight, Pencil, ChevronDown } from '@gravity-ui/icons';
+import { createCompany } from '@/lib/actions/companies';
 
 // Layout Shared Style Constants matching your design image
 const textInputClass = "w-full bg-zinc-900/50 border border-zinc-800 text-white rounded-lg px-3 py-2.5 outline-none placeholder:text-zinc-600 focus:border-zinc-700 transition";
@@ -71,7 +73,7 @@ export default function CompanyProfile() {
     };
 
     // 3. Submit Profile Form Data
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         
@@ -94,7 +96,7 @@ export default function CompanyProfile() {
         }
 
         // Commit state updates
-        setCompany({
+        const newCompanyData = {
             name: companyName,
             websiteUrl,
             industry: industry || 'Technology',
@@ -103,9 +105,18 @@ export default function CompanyProfile() {
             description,
             logo: logoUrl || (company ? company.logo : ''),
             status: company ? company.status : 'Pending' // Retains status if updating profile details
-        });
+        }
 
-        console.log("submitted company profile data: ", company);
+        setCompany(newCompanyData);
+
+        console.log("Submitted Company Profile Data:", newCompanyData);
+
+        const payload = await createCompany(newCompanyData);
+
+        if(payload.insertedId) {
+
+            toast.success("Company profile created successfully!");
+        }
 
         setErrors({});
         setIsEditing(false);
