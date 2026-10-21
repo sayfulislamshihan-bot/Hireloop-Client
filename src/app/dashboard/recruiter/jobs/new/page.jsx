@@ -12,9 +12,12 @@ import {
     Select,
     ListBox,
     Switch,
-    Button
+    Button,
+    toast
     } from "@heroui/react";
 import { Briefcase, Globe } from "@gravity-ui/icons";
+import { createJob } from "@/lib/actions/jobs";
+import { redirect } from "next/navigation";
 
 export default function PostJobPage() {
         // Mock configuration for recruiter's authenticated state
@@ -27,7 +30,7 @@ export default function PostJobPage() {
         const [isRemote, setIsRemote] = useState(false);
     const [errors, setErrors] = useState({});
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!mockCompany.isApproved) {
@@ -64,7 +67,13 @@ export default function PostJobPage() {
             isPubliclyVisible: true,
         };
 
-        console.log("Submitting job payload:", payload);
+        const res = await createJob(payload);
+        if (res.insertedId) {
+            toast.success("Job posted successfully!");
+            e.target.reset();
+            setIsRemote(false);
+            redirect("/dashboard/recruiter");
+        }
     };
 
     // Dark styles styled to match your image_988c20.png reference layout
