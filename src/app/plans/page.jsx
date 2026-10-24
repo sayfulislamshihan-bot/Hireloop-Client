@@ -238,15 +238,18 @@ const PricingPage = () => {
 
                             {/* Plan Action CTA Callout Anchor Point */}
                             <div className="mt-8">
-                                <Link
-                                    href="/auth/signup"
-                                    className={`block w-full text-center text-xs font-semibold px-4 py-3 rounded-xl transition duration-200 ${plan.popular
+                                <form action="/api/checkout_sessions" method="POST">
+                                    <section>
+                                        <button type="submit" role="link"
+                                        className={`block w-full text-center text-xs font-semibold px-4 py-3 rounded-xl transition duration-200 ${plan.popular
                                             ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
                                             : 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700/50'
                                         }`}
-                                >
-                                    {plan.cta}
-                                </Link>
+                                        >
+                                        Checkout
+                                        </button>
+                                    </section>
+                                </form>
                             </div>
                         </div>
                     ))}
