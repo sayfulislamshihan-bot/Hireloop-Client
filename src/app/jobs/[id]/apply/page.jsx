@@ -3,6 +3,8 @@ import { getUserSession } from '@/lib/core/session';
 import { redirect } from 'next/navigation';
 import React from 'react';
 import JobApply from './JobApply';
+import Link from 'next/link';
+import { getApplicationsByApplicant } from '@/lib/api/applications';
 
 
 
@@ -25,11 +27,24 @@ const ApplyPage = async ({ params }) => {
         );
     }
 
+    const applications = await getApplicationsByApplicant(user.id);
+
+    const plan = {
+        name: 'Free',
+        maxApplicationsPerMonth: 3
+    }
+
     const job = await getJobById(id);
 
     return (
         <div>
-            <JobApply applicant={user} job={job} />
+            <h2> You have applied so far: {applications.length} out of {plan.maxApplicationsPerMonth} this month </h2>
+            <p>Purchase plan to apply for more positions. <Link href="/plans">View Plans</Link> </p>
+            {
+                applications.length < plan.maxApplicationsPerMonth && (
+                    <JobApply applicant={user} job={job} />
+                )
+            }
         </div>
     );
 };
