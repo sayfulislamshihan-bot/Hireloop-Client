@@ -48,12 +48,15 @@ export default function SignupPage() {
     setSuccess("");
     setIsLoading(true);
 
+    const plan = role === 'seeker' ? 'seeker_free' : 'recruiter_free';
+
     try {
       const { data, error: authError } = await signUp.email({
         email,
         password,
         name,
         role,
+        plan,
         callbackURL: "/"  // Redirect after successful signup
       });
 
