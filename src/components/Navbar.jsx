@@ -102,14 +102,13 @@ export default function Navbar() {
                 Sign In
               </Link>}
 
-              <Button
-                as={Link}
-                href="/register"
+              <Link
+                href="/auth/signup"
                 radius="lg"
                 className="h-11 bg-white px-6 text-sm font-semibold text-black hover:bg-gray-200"
               >
                 Get Started
-              </Button>
+              </Link>
             </div>
           </div>
 
