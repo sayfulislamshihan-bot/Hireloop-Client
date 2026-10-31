@@ -4,7 +4,7 @@ import { serverFetch } from "../core/server";
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const getJobs = async () =>{
-    return serverFetch('/api/jobs');
+    return serverFetch('/api/jobs', { cache: 'no-store' });
 }
 
 export const getJobById = async (jobId) => {

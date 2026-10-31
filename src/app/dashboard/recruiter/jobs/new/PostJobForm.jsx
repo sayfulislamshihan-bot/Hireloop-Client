@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
     Form,
     Fieldset,
@@ -17,9 +18,9 @@ import {
 } from "@heroui/react";
 import { Briefcase, Globe } from "@gravity-ui/icons";
 import { createJob } from "@/lib/actions/jobs";
-import { redirect } from "next/navigation";
 
 export default function PostJobForm({ company }) {
+    const router = useRouter();
     // Mock configuration for recruiter's authenticated state
     console.log("PostJobForm received company prop:", company);
     // const [company] = useState({
@@ -76,7 +77,7 @@ export default function PostJobForm({ company }) {
             toast.success("Job posted successfully!");
             e.target.reset();
             setIsRemote(false);
-            redirect("/dashboard/recruiter/jobs");
+            router.push("/dashboard/recruiter/jobs");
         }
     };
 
