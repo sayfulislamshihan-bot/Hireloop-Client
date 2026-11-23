@@ -22,7 +22,6 @@ export async function DashboardSidebar() {
     const seekerNavLinks = [
         { icon: House, href: "/dashboard/seeker", label: "Dashboard" },
         { icon: Magnifier, href: "/dashboard/seeker/jobs", label: "Jobs" },
-        { icon: Bookmark, href: "/dashboard/seeker/saved-jobs", label: "Saved Jobs" },
         { icon: FileText, href: "/dashboard/seeker/applications", label: "Applications" },
         { icon: CreditCard, href: "/dashboard/seeker/billing", label: "Billing" },
         { icon: Gear, href: "/settings", label: "Settings" },
