@@ -14,9 +14,8 @@ export async function DashboardSidebar() {
         { icon: Magnifier, href: "/dashboard/recruiter/jobs", label: "Jobs" },
         { icon: Bell, href: "/dashboard/recruiter/jobs/new", label: "Post A Job" },
         { icon: Briefcase, href: "/dashboard/recruiter/company", label: "Company Profile" },
-        { icon: Envelope, href: "/messages", label: "Messages" },
-        { icon: Person, href: "/profile", label: "Profile" },
-        { icon: Gear, href: "/settings", label: "Settings" },
+        { icon: Person, href: "/dashboard/recruiter/profile", label: "Profile" },
+        { icon: Gear, href: "/dashboard/recruiter/settings", label: "Settings" },
     ]
 
     const seekerNavLinks = [
@@ -24,7 +23,7 @@ export async function DashboardSidebar() {
         { icon: Magnifier, href: "/dashboard/seeker/jobs", label: "Jobs" },
         { icon: FileText, href: "/dashboard/seeker/applications", label: "Applications" },
         { icon: CreditCard, href: "/dashboard/seeker/billing", label: "Billing" },
-        { icon: Gear, href: "/settings", label: "Settings" },
+        { icon: Gear, href: "/dashboard/seeker/settings", label: "Settings" },
     ];
 
     const adminNavLinks = [
