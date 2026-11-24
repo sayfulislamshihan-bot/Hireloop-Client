@@ -17,7 +17,7 @@ import {
     toast
 } from "@heroui/react";
 import { Briefcase, Globe } from "@gravity-ui/icons";
-import { createJob } from "@/lib/actions/jobs";
+import { createRecruiterJob } from "@/lib/actions/recruiterJobs";
 
 export default function PostJobForm({ company }) {
     const router = useRouter();
@@ -71,13 +71,24 @@ export default function PostJobForm({ company }) {
             isPubliclyVisible: true,
         };
 
-        const res = await createJob(payload);
+        let res;
+        try {
+            res = await createRecruiterJob(payload);
+        } catch (error) {
+            toast.danger("Could not post the job. Please try again.");
+            return;
+        }
 
         if (res.insertedId) {
             toast.success("Job posted successfully!");
             e.target.reset();
             setIsRemote(false);
             router.push("/dashboard/recruiter/jobs");
+        } else if (res.limitReached) {
+            toast.danger(`You have reached your active job posting limit (${res.activeJobs}/${res.limit}).`);
+            router.refresh();
+        } else if (res.message) {
+            toast.danger(res.message);
         }
     };
 
