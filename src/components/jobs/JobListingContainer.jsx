@@ -4,7 +4,7 @@ import React, { useState, useMemo } from "react";
 import JobCard from "@/components/jobs/JobCard";
 import JobFilters from "@/components/jobs/JobFilters";
 
-export default function JobListingContainer({ initialJobs }) {
+export default function JobListingContainer({ initialJobs, basePath = "/jobs" }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -46,9 +46,10 @@ export default function JobListingContainer({ initialJobs }) {
       {filteredJobs.length > 0 ? (
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
           {filteredJobs.map((jobItem) => (
-            <JobCard 
-              key={jobItem._id?.$oid || jobItem._id} 
-              job={jobItem} 
+            <JobCard
+              key={jobItem._id?.$oid || jobItem._id}
+              job={jobItem}
+              basePath={basePath}
             />
           ))}
         </div>

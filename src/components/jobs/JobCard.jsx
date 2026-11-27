@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Button, Link } from "@heroui/react";
 import { MapPin, Briefcase, CircleDollar, ArrowRight } from "@gravity-ui/icons";
 
-export default function JobCard({ job }) {
+export default function JobCard({ job, basePath = "/jobs" }) {
   // Guard clause in case the prop isn't passed or is loading
   if (!job) return null;
 
@@ -98,7 +98,7 @@ export default function JobCard({ job }) {
       {/* Card Footer: Action Button */}
       <Card.Footer className="p-0 pt-4">
         <Link
-          href={`/jobs/${jobId}`}
+          href={`${basePath}/${jobId}`}
           className="group flex justify-start items-center gap-2 bg-transparent hover:bg-zinc-800/40 p-0 text-base font-medium text-white transition-all duration-200"
           variant="light"
           disableRipple
