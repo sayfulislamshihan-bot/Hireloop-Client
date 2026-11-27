@@ -4,6 +4,7 @@ import Link from 'next/link';
 // Gravity UI Icons for a high-quality production finish
 import { CircleCheckFill, Envelope, ArrowLeft } from '@gravity-ui/icons';
 import { createSubscription } from '@/lib/actions/subscriptions';
+import { getUserSession } from '@/lib/core/session';
 
 export default async function Success({ searchParams }) {
     const { session_id } = await searchParams;
@@ -24,6 +25,12 @@ export default async function Success({ searchParams }) {
     }
 
     if (status === 'complete') {
+        const user = await getUserSession();
+        const dashboardPath = {
+            seeker: '/dashboard/seeker',
+            recruiter: '/dashboard/recruiter',
+            admin: '/dashboard/admin',
+        }[user?.role] || '/';
         const subsInfo = {
            email: customerEmail,
            planId: metadata.planId
@@ -77,7 +84,7 @@ export default async function Success({ searchParams }) {
                     {/* Interactive Navigation Calls to Action */}
                     <div className="space-y-3">
                         <Link
-                            href="/dashboard"
+                            href={dashboardPath}
                             className="block w-full text-center text-xs font-semibold px-4 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl shadow-lg shadow-blue-950/30 transition duration-200"
                         >
                             Go to Workspace Dashboard
