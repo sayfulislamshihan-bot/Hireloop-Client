@@ -11,6 +11,7 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   const user = session?.user;
+  const userInitial = user?.name?.trim().charAt(0).toUpperCase() || "U";
 
     const handleSignOut = async () => {
     await signOut();
@@ -90,7 +91,12 @@ export default function Navbar() {
               {
                 user ? 
                 <>
-                    Hi, {user.name}!
+                    <span className="inline-flex items-center gap-2.5 text-sm font-medium text-gray-200">
+                      <span aria-hidden="true" className="grid size-9 place-items-center rounded-full border border-violet-400/30 bg-violet-500/15 text-sm font-semibold text-violet-200">
+                        {userInitial}
+                      </span>
+                      <span>Hi {user.name}</span>
+                    </span>
                     <Button onClick={handleSignOut}
                       variant="ghost">SignOut</Button>
                 </>
@@ -174,21 +180,33 @@ export default function Navbar() {
             {/* Divider */}
             <div className="border-t border-white/10 pt-4">
               <div className="flex flex-col gap-3">
-                <Link
-                  href="/auth/signin"
-                  className="rounded-xl px-4 py-3 text-base font-medium text-violet-400 transition hover:bg-white/5"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Sign In
-                </Link>
+                {user ? (
+                  <>
+                    <div className="flex items-center gap-3 rounded-xl px-4 py-3 text-gray-200">
+                      <span aria-hidden="true" className="grid size-9 place-items-center rounded-full border border-violet-400/30 bg-violet-500/15 text-sm font-semibold text-violet-200">
+                        {userInitial}
+                      </span>
+                      <span className="text-sm font-medium">Hi, {user.name}!</span>
+                    </div>
+                    <Button onClick={handleSignOut} variant="ghost" className="justify-start" >Sign Out</Button>
+                  </>
+                ) : (
+                  <Link
+                    href="/auth/signin"
+                    className="rounded-xl px-4 py-3 text-base font-medium text-violet-400 transition hover:bg-white/5"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign In
+                  </Link>
+                )}
 
-                <Link
+                {!user && <Link
                   href="/auth/signup"
                   className="inline-flex items-center justify-center rounded-xl bg-white px-4 py-3 font-semibold text-black transition hover:bg-gray-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Get Started
-                </Link>
+                </Link>}
               </div>
             </div>
           </div>
