@@ -49,33 +49,43 @@ const CompanyTable = ({ companies }) => {
     };
 
     return (
-        <div className="w-full bg-[#121214] text-neutral-200 p-6 rounded-lg">
-            <Table className="bg-transparent border-none">
+        <div className="w-full overflow-hidden rounded-2xl border border-zinc-800 bg-[#141416] p-4 text-zinc-200 sm:p-6">
+            <Table
+                className="w-full"
+                classNames={{
+                    base: 'bg-transparent',
+                    table: 'border-collapse',
+                    thead: '[&>tr]:border-b [&>tr]:border-zinc-800/80',
+                    th: 'bg-transparent text-zinc-500 font-medium text-xs uppercase tracking-wide py-4 border-b border-zinc-800/80',
+                    tr: 'border-b border-zinc-800/70 transition-colors last:border-none hover:bg-zinc-900/40',
+                    td: 'py-4 align-middle text-sm text-zinc-300',
+                }}
+            >
                 <Table.ScrollContainer>
                     <Table.Content aria-label="Company approval management table">
                         <Table.Header>
                             {/* Add the isRowHeader prop to your primary identifying column */}
-                            <Table.Column isRowHeader className="text-neutral-400 font-medium pb-4 border-b border-neutral-800">
+                            <Table.Column isRowHeader className="text-zinc-500 font-medium pb-4 border-b border-zinc-800/80">
                                 Company Name
                             </Table.Column>
 
-                            <Table.Column className="text-neutral-400 font-medium pb-4 border-b border-neutral-800">
+                            <Table.Column className="text-zinc-500 font-medium pb-4 border-b border-zinc-800/80">
                                 Recruiter Email
                             </Table.Column>
 
-                            <Table.Column className="text-neutral-400 font-medium pb-4 border-b border-neutral-800">
+                            <Table.Column className="text-zinc-500 font-medium pb-4 border-b border-zinc-800/80">
                                 Industry
                             </Table.Column>
 
-                            <Table.Column className="text-neutral-400 font-medium pb-4 border-b border-neutral-800">
+                            <Table.Column className="text-zinc-500 font-medium pb-4 border-b border-zinc-800/80">
                                 Status
                             </Table.Column>
 
-                            <Table.Column className="text-neutral-400 font-medium pb-4 border-b border-neutral-800">
+                            <Table.Column className="text-zinc-500 font-medium pb-4 border-b border-zinc-800/80">
                                 Date Submitted
                             </Table.Column>
 
-                            <Table.Column className="text-neutral-400 font-medium pb-4 border-b border-neutral-800 text-right">
+                            <Table.Column className="text-zinc-500 font-medium pb-4 border-b border-zinc-800/80 text-right">
                                 Actions
                             </Table.Column>
                         </Table.Header>
@@ -85,25 +95,25 @@ const CompanyTable = ({ companies }) => {
                                 const statusInfo = getStatusDetails(company.status);
 
                                 return (
-                                    <Table.Row key={companyId} className="border-b border-neutral-800/50 hover:bg-neutral-900/30 transition-colors">
+                                    <Table.Row key={companyId} className="border-b border-zinc-800/70 hover:bg-zinc-900/40 transition-colors">
                                         {/* Company Avatar & Name */}
                                         <Table.Cell className="py-4 align-middle">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-9 h-9 flex items-center justify-center bg-neutral-800 text-neutral-300 rounded font-semibold text-sm tracking-wider">
+                                                <div className="grid size-10 place-items-center rounded-xl border border-blue-400/20 bg-blue-500/10 text-sm font-semibold tracking-wider text-blue-300">
                                                     {getInitials(company.name)}
                                                 </div>
-                                                <span className="font-medium text-neutral-200">{company.name}</span>
+                                                <span className="font-medium text-zinc-100">{company.name}</span>
                                             </div>
                                         </Table.Cell>
 
                                         {/* Recruiter Email Placeholder */}
-                                        <Table.Cell className="py-4 align-middle text-neutral-400">
+                                        <Table.Cell className="py-4 align-middle text-zinc-400">
                                             {company.recruiterEmail || `recruiter@${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
                                         </Table.Cell>
 
                                         {/* Industry Pill */}
                                         <Table.Cell className="py-4 align-middle">
-                                            <span className="px-3 py-1 bg-neutral-800/60 text-neutral-400 rounded-full text-xs capitalize">
+                                            <span className="rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1 text-xs capitalize text-zinc-400">
                                                 {company.industry}
                                             </span>
                                         </Table.Cell>
@@ -131,7 +141,7 @@ const CompanyTable = ({ companies }) => {
                                                         size="sm"
                                                         variant="light"
                                                         onClick={() => handleApprove(companyId)}
-                                                        className="bg-emerald-950/30 hover:bg-emerald-900/50 text-emerald-500 border border-emerald-900/60 rounded px-3 py-1 text-xs font-medium transition-colors"
+                                                        className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300 transition-colors hover:bg-emerald-500/20"
                                                     >
                                                         Approve
                                                     </Button>
@@ -141,7 +151,7 @@ const CompanyTable = ({ companies }) => {
                                                         size="sm"
                                                         variant="light"
                                                         onClick={() => handleReject(companyId)}
-                                                        className="bg-rose-950/20 hover:bg-rose-900/40 text-rose-500 border border-rose-900/40 rounded px-3 py-1 text-xs font-medium transition-colors"
+                                                        className="rounded-lg border border-rose-500/20 bg-rose-500/10 px-3 py-1 text-xs font-medium text-rose-300 transition-colors hover:bg-rose-500/20"
                                                     >
                                                         Reject
                                                     </Button>
